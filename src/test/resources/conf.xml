@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Selenium Tests">
+    <test name="Google search">
+        <classes>
+            <!--<class name="com.google.SeleniumGoogleSearchTest"/> //use class when need order, as setup-->
+            <class name="com.google.SelenideGoogleSearchTest"/>
+            <!--<packages>-->
+            <!--<package name="com.google"></package>-->
+            <!--</packages>-->
+        </classes>
+    </test>
+</suite>
