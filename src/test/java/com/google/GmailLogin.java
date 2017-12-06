@@ -36,7 +36,7 @@ public class GmailLogin {
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    @Test
+    @Test (enabled = false)
     public void loginTest() {
         webDriver.manage().getCookies();
         webDriver.get("https://www.gmail.com");
