@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class SearchPage extends AbstractPage {
-    private By searchLocator = By.name("qq");
+    private By searchLocator = By.name("q");
     private WebElement search;
 
     public SearchPage(WebDriver webDriver) {
