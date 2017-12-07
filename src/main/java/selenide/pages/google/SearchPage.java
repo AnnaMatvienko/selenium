@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SearchPage {
-    private SelenideElement search = $(By.name("qq"));
+    private SelenideElement search = $(By.name("q"));
 
     //@Step("Searches for {0} text")
 
