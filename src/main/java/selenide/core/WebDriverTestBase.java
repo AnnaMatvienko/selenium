@@ -6,9 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -16,6 +18,7 @@ import org.testng.annotations.*;
 //import org.testng.annotations.Listeners;
 
 import static com.codeborne.selenide.WebDriverRunner.CHROME;
+import static org.openqa.selenium.remote.BrowserType.FIREFOX;
 import static selenide.util.PropertiesCache.getProperty;
 
 @Listeners({selenide.core.SeleniumTestListener.class})
@@ -30,24 +33,28 @@ public class WebDriverTestBase {
 
     public DesiredCapabilities setDesiredCapabilities(String platform, String remoteBrowser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        if (platform.equalsIgnoreCase("WIN8_1")) {
-            caps.setPlatform(Platform.WIN8_1);
+        if (platform.equalsIgnoreCase("WIN10")) {
+            caps.setPlatform(Platform.WIN10);
             caps.setBrowserName(remoteBrowser);
         }
         return caps;
     }
 
-    @Parameters({"platform", "remoteBrowser"})
+    @Parameters({"platform", "remoteBrowser"}) //TestNG annotations
     @BeforeClass
     public void setUp(@Optional String platform, @Optional String remoteBrowser) throws MalformedURLException {
         switch (browser) {
+            case CHROME:
+                ChromeDriverManager.getInstance().setup();
+                webDriver = new ChromeDriver();
+                break;
+            case FIREFOX:
+                FirefoxDriverManager.getInstance().setup();
+                webDriver = new FirefoxDriver();
+                break;
             case "remote":
                 DesiredCapabilities caps = setDesiredCapabilities(platform, remoteBrowser);
                 webDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
-                break;
-            case BrowserType.CHROME:
-                ChromeDriverManager.getInstance().setup();
-                webDriver = new ChromeDriver();
                 break;
         }
 

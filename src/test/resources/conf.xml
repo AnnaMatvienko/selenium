@@ -1,13 +1,44 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >-->
+<!--<suite name="Selenium Tests">-->
+<!--<test name="Google search">-->
+<!--<classes>-->
+<!--&lt;!&ndash;<class name="com.google.SeleniumGoogleSearchTest"/> //use class when need order, as setup&ndash;&gt;-->
+<!--<class name="com.google.SelenideGoogleSearchTest"/>-->
+<!--&lt;!&ndash;<packages>&ndash;&gt;-->
+<!--&lt;!&ndash;<package name="com.google"></package>&ndash;&gt;-->
+<!--&lt;!&ndash;</packages>&ndash;&gt;-->
+<!--</classes>-->
+<!--</test>-->
+<!--</suite>-->
 
-<suite name="Selenium Tests">
-    <test name="Google search">
-        <classes>
-            <!--<class name="com.google.SeleniumGoogleSearchTest"/> //use class when need order, as setup-->
-            <class name="com.google.SelenideGoogleSearchTest"/>
-            <!--<packages>-->
-            <!--<package name="com.google"></package>-->
-            <!--</packages>-->
-        </classes>
-    </test>
+<suite name="Parallel Tests" verbose="1" thread-count="4" parallel="tests">
+    <tests>
+        <test name=" Windows + Chrome Test">
+            <parameters>
+                <parameter name="platform" value="WIN10"/>
+                <parameter name="remoteBrowser" value="chrome"/>
+            </parameters>
+            <classes>
+                <class name="com.google.SeleniumGoogleSearchTest"/>
+            </classes>
+        </test>
+        <test name="Windows + FireFox Test">
+            <parameters>
+                <parameter name="platform" value="WIN10"/>
+                <parameter name="remoteBrowser" value="firefox"/>
+            </parameters>
+            <classes>
+                <class name="com.google.SeleniumGoogleSearchTest"/>
+            </classes>
+        </test>
+        <test name=" Windows + Internet Explorer Test">
+            <parameters>
+                <parameter name="platform" value="WIN10"/>
+                <parameter name="remoteBrowser" value="internet explorer"/>
+            </parameters>
+            <classes>
+                <class name="com.google.SeleniumGoogleSearchTest"/>
+            </classes>
+        </test>
+    </tests>
 </suite>
